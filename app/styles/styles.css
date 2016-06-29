@@ -1,0 +1,64 @@
+
+/* Styling the header */
+
+h1{
+	margin-bottom: 2.5%;
+  text-align: center;
+}
+
+/* Styling buttons */
+
+.button {
+  text-align: center;
+}
+
+.delete{
+  margin-top: 10px;
+}
+
+/* Styling the modal form */
+
+.form-group div {
+  margin-bottom: 2.5%;
+}
+
+.modalSubmit{
+  margin-top: 12px;
+
+}
+
+/* Styling the map */
+
+#map {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%;
+}
+
+/* Styling the table */
+
+.container {
+  margin-bottom: 2.5%;
+  width: 80%;
+}
+
+.linkHeading{
+  text-align: center;
+}
+
+/* Styling the footer */
+
+.centFooter {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+footer {
+  font-size: 0.75em;
+  clear: both;
+  padding-top: 50px
+  color: #ccc;
+  text-align: center;
+}

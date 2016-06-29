@@ -1,0 +1,35 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Enter in your San Diego Top Spot!!</h4>
+            </div>
+            <div class="modal-body" ng-transclude>
+                <form role="form" class="container">
+                    <div class="form-group">
+                        <label for="topSpotName">Name</label>
+                        <input type="text" class="form-control" id="topSpotName" ng-model="topSpotName" placeholder="Name your San Diego Top Spot">
+                    </div>
+                    <div class="form-group">
+                        <label for="topSpotDesc">Description</label>
+                        <textarea class="form-control" id="topSpotDesc" ng-model="topSpotDesc" rows="6" placeholder="Describe your San Diego Top Spot"></textarea>
+                    </div>
+                    <div class="form-inline topSpotLocations">
+                        <div class="col-xs-6">
+                            <label for="topSpotLat">Latitude</label>
+                            <input type="number" class="form-control" id="topSpotLat" ng-model="topSpotLat" placeholder="33.00 &deg">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="topSpotLong">Longitude</label>
+                            <input type="number" class="form-control" id="topSpotLong" ng-model="topSpotLong" placeholder="-117.00 &deg">
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="submit" ng-click="showModal = !showModal; vm.addTopSpot(topSpotName, topSpotDesc, topSpotLat, topSpotLong); topSpotName = ''; topSpotDesc = ''; topSpotLat = ''; topSpotLong = ''" class="btn btn-primary modalSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
