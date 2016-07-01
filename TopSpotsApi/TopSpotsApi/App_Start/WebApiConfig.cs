@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,17 @@ namespace TopSpotsApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Changing default Media output type from XML to json
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //Configuring json Formatter to output in CamelCase and with indented formatting
+            var formatter = GlobalConfiguration.Configuration.Formatters;
+            var jsonFormatters = formatter.JsonFormatter;
+            var settings = jsonFormatters.SerializerSettings;
+            settings.Formatting = Formatting.Indented;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }

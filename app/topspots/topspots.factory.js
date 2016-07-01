@@ -1,4 +1,3 @@
-
 // Creating TopSpotsFactory to contain top spots related services
 
 (function() {
@@ -8,10 +7,11 @@
         .module('myApp')
         .factory('TopSpotsFactory', TopSpotsFactory);
 
-    TopSpotsFactory.$inject = ['$http','$q'];
+    TopSpotsFactory.$inject = ['$http', '$q'];
 
     /* @ngInject */
     function TopSpotsFactory($http, $q) {
+        var url = 'http://localhost:51057/api/topspots/';
         var service = {
             getTopSpots: getTopSpots,
             addTopSpot: addTopSpot,
@@ -27,46 +27,91 @@
 
             var defer = $q.defer();
 
-                $http({
+            $http({
                 method: 'GET',
-                url: 'http://localhost:51057/api/topspots/'
-            }).then(function(response){
-                if (typeof response.data === 'object'){
-                    defer.resolve(response);
-                } else{
-                    defer.reject("No data found!");
-                }              
-            },
-            function(error){
-                defer.reject(error);
-            });
+                url: url
+            }).then(function(response) {
+                    if (typeof response.data === 'object') {
+                        defer.resolve(response);
+                    } else {
+                        defer.reject("No data found!");
+                    }
+                },
+                function(error) {
+                    defer.reject(error);
+                });
 
             return defer.promise;
 
         }
 
-        function addTopSpot(topSpots, topSpotName, topSpotDesc, topSpotLat, topSpotLong){
+        function addTopSpot(topSpots, topSpotName, topSpotDesc, topSpotLat, topSpotLong) {
 
             var defer = $q.defer();
 
-            if(topSpotName !== "" && topSpotDesc !== "" && topSpotLat !=="" && topSpotLong !==""){
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+
+            //Checks form to see if any fields were not input and then posts data to api
+
+            if (topSpotName !== "" && topSpotDesc !== "" && topSpotLat !== "" && topSpotLong !== "") {
 
                 var topSpotLocation = [topSpotLat, topSpotLong];
-                var topSpot = {name: topSpotName, description: topSpotDesc, location: topSpotLocation};
-                return topSpots.push(topSpot);
+                var topSpot = { name: topSpotName, description: topSpotDesc, location: topSpotLocation };
+                var topSpotJSON = JSON.stringify(topSpot);
 
-            } else if (topSpotName === "" || topSpotDesc === "" || topSpotLat ==="" ||topSpotLong ===""){
+                $http({
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
+                    data: topSpot
+                }).then(function(response) {
+                        if (typeof response.data === 'object') {
+                            defer.resolve(response);
+                        } else {
+                            defer.reject("No data found!");
+                        }
+                    },
+                    function(error) {
+                        defer.reject(error);
+                    });
+
+                return defer.promise;
+
+                //Return error message if any fields were missing
+            } else if (topSpotName === "" || topSpotDesc === "" || topSpotLat === "" || topSpotLong === "") {
                 defer.reject("Please complete the form! You are missing inputed fields.");
                 return defer.promise;
-            } 
+            }
         }
 
-        function deleteTopSpot(topSpots, index){
-            return topSpots.splice(index, 1);
+        function deleteTopSpot(index) {
+            
+            var defer = $q.defer();
+
+
+            $http({
+                method: 'DELETE',
+                url: url + index
+            }).then(function(response) {
+                    if (typeof response.data === 'object') {
+                        defer.resolve(response);
+                    } else {
+                        defer.reject("No data found!");
+                    }
+                },
+                function(error) {
+                    defer.reject(error);
+                });
+
+            return defer.promise;
+
 
         }
     }
 })();
-
-
-    

@@ -47,7 +47,7 @@
                     <td>{{data.description}}</td>
                     <td class="button">
                         <a ng-href="https://www.google.com/maps?q={{data.location[0] + ',' + data.location[1]}}" target="_blank" class="btn btn-primary active" role="button">Open in Google Maps</a>
-                        <a href="" ng-click="vm.deleteTopSpot($index)" class="glyphicon glyphicon-remove
+                        <a href="" ng-click="vm.deleteTopSpot(data)" class="glyphicon glyphicon-remove
 "></a>
                     </td>
                 </tr>

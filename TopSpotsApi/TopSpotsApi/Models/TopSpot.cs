@@ -5,6 +5,7 @@ using System.Web;
 
 namespace TopSpotsApi.Models
 {
+    //Defining TopSpots Object with Properties Name, Description and Location
     public class TopSpot
     {
         public string Name { get; set; }
