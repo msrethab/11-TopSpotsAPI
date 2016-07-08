@@ -23,6 +23,8 @@
 
         //Defining TopSpots related services to get, add and delete topSpots
 
+        //Gets Topspots from topspots.json using a GET HTTP request from TopspotsAPI
+
         function getTopSpots() {
 
             var defer = $q.defer();
@@ -45,15 +47,11 @@
 
         }
 
+        //Adds Topspots to topspots.json using DELETE HTTP request from TopspotsAPI
+
         function addTopSpot(topSpots, topSpotName, topSpotDesc, topSpotLat, topSpotLong) {
 
             var defer = $q.defer();
-
-            var config = {
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            }
 
             //Checks form to see if any fields were not input and then posts data to api
 
@@ -61,7 +59,6 @@
 
                 var topSpotLocation = [topSpotLat, topSpotLong];
                 var topSpot = { name: topSpotName, description: topSpotDesc, location: topSpotLocation };
-                var topSpotJSON = JSON.stringify(topSpot);
 
                 $http({
                     method: 'POST',
@@ -90,8 +87,10 @@
             }
         }
 
+        //Deletes Topspots from topspots.json using DELETE HTTP Request from TopspotsAPI
+
         function deleteTopSpot(index) {
-            
+
             var defer = $q.defer();
 
 
@@ -110,7 +109,6 @@
                 });
 
             return defer.promise;
-
 
         }
     }

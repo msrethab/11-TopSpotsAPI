@@ -20,3 +20,11 @@ Version 1.0.1
 -Formatted comments to make code more readable
 
 -Added DELETE method functionality to API, does not work in Chrome, but works in Edge
+
+
+
+Version 1.0.2
+
+-Added PreflightRequests Handler to send back OK Response on preflight OPTIONS request with appropriate headers
+
+-Enabled functionality using Chrome browser

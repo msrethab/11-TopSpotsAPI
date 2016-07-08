@@ -41,14 +41,14 @@
                     })
         }
 
-        //Calling functions form TopspotsFactory to add and delete topspots
+        //Calling functions from TopspotsFactory to add TopSpot
 
         function addTopSpot(topSpotName, topSpotDesc, topSpotLat, topSpotLong) {
             TopSpotsFactory.addTopSpot(vm.topspots, topSpotName, topSpotDesc, topSpotLat, topSpotLong).then(function(response) {
 
                     vm.topspotAdded = response.data;
                     vm.topspots.push(vm.topspotAdded);
-                    toastr.success('Top Spots Data Loaded!');
+                    toastr.success('Top Spot Successfully Added!');
 
 
                 },
@@ -61,14 +61,16 @@
                 });
         }
 
+        //Calling functions from TopspotsFactory to delete TopSpot
+
         function deleteTopSpot(data) {
             var index = vm.topspots.indexOf(data);
             vm.topspots.splice(index, 1);
-            
+
             TopSpotsFactory.deleteTopSpot(index).then(function(response) {
 
                     vm.topspotDel = response.data;
-                    toastr.success('Top Spots Data Loaded!');
+                    toastr.success('Top Spot Successfully Deleted!');
 
 
                 },
